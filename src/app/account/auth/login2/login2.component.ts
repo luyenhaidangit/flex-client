@@ -64,24 +64,24 @@ export class Login2Component implements OnInit {
     if (this.loginForm.invalid) {
       return;
     } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
-          this.router.navigate(['/dashboard']);
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
-      } else {
-        this.authFackservice.login(this.f.email.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate(['/dashboard']);
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
+      // if (environment.defaultauth === 'firebase') {
+      //   this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
+      //     this.router.navigate(['/dashboard']);
+      //   })
+      //     .catch(error => {
+      //       this.error = error ? error : '';
+      //     });
+      // } else {
+      //   this.authFackservice.login(this.f.email.value, this.f.password.value)
+      //     .pipe(first())
+      //     .subscribe(
+      //       data => {
+      //         this.router.navigate(['/dashboard']);
+      //       },
+      //       error => {
+      //         this.error = error ? error : '';
+      //       });
+      // }
     }
   }
 }

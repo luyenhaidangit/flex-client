@@ -7,8 +7,8 @@
             <div class="row">
               <div class="col-7">
                 <div class="text-primary p-4">
-                  <h5 class="text-primary">Welcome Back !</h5>
-                  <p>Sign in to continue to Skote.</p>
+                  <h5 class="text-primary">Chào mừng quay trở lại !</h5>
+                  <p>Đăng nhập để tiếp tục truy cập Flex.</p>
                 </div>
               </div>
               <div class="col-5 align-self-end">
@@ -32,17 +32,17 @@
                 <alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</alert>
 
                 <div class="mb-3">
-                  <label for="email">Email</label>
-                  <input type="email" formControlName="email" class="form-control" id="email" placeholder="Email"
+                  <label for="email">Tên người dùng</label>
+                  <input type="email" formControlName="userName" class="form-control" id="userName" placeholder="Username"
                     [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                    <div *ngIf="f.email.errors.required">Email is required</div>
-                    <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                    <div *ngIf="f.userName.errors.required">Tên người dùng không được để trống</div>
+                    <!-- <div *ngIf="f.email.errors.email">Email must be a valid email address</div> -->
                   </div>
                 </div>
 
                 <div class="mb-3">
-                  <label for="password">Password</label>
+                  <label for="password">Mật khẩu</label>
                   <div class="input-group auth-pass-inputgroup">
                     <input type="password" class="form-control" formControlName="password" placeholder="Enter password"
                       [ngClass]="{ 'is-invalid': submitted && f.password.errors }" aria-label="Password"
@@ -51,23 +51,23 @@
                     <button class="btn btn-light ms-0" type="button" id="password-addon"><i
                         class="mdi mdi-eye-outline"></i></button>
                     <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                      <span *ngIf="f.password.errors.required">Password is required</span>
+                      <span *ngIf="f.password.errors.required">Mật khẩu không được để trống</span>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="remember-check">
+                  <input class="form-check-input" type="checkbox" id="remember-check" formControlName="rememberMe">
                   <label class="form-check-label" for="remember-check">
-                      Remember me
+                      Lưu đăng nhập
                   </label>
               </div>
 
                 <div class="mt-3 d-grid">
-                  <button class="btn btn-primary" type="submit">Log In</button>
+                  <button class="btn btn-primary" type="submit">Đăng nhập</button>
                 </div>
                 <div class="mt-4 text-center">
-                  <h5 class="font-size-14 mb-3">Sign in with</h5>
+                  <h5 class="font-size-14 mb-3">Đăng nhập với</h5>
 
                   <ul class="list-inline">
                     <li class="list-inline-item">
@@ -88,9 +88,7 @@
                   </ul>
                 </div>
                 <div class="mt-4 text-center">
-                  <a routerLink="/account/reset-password" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot
-                    your
-                    password?</a>
+                  <a routerLink="/account/reset-password" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Quên mật khẩu?</a>
                 </div>
               </form>
             </div>
@@ -98,10 +96,9 @@
           </div>
         </div>
         <div class="mt-5 text-center">
-          <p>Don't have an account ? <a routerLink="/account/signup" class="fw-medium text-primary"> Signup
-              now
+          <p>Chưa có tài khoản ? <a routerLink="/account/signup" class="fw-medium text-primary"> Yêu cầu đăng ký
             </a> </p>
-          <p>© {{year}} Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+          <p>© {{year}} Flex. Phát triển bởi <i class="mdi mdi-heart text-danger"></i> Luyện Hải Đăng</p>
         </div>
 
       </div>

@@ -4,20 +4,23 @@ import { getFirebaseBackend } from '../../authUtils';
 
 import { User } from '../models/auth.models';
 
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
 
     user: User;
 
-    constructor() {
+    constructor(private http: HttpClient,private router: Router) {
     }
 
     /**
      * Returns the current user
      */
-    public currentUser(): User {
-        return getFirebaseBackend().getAuthenticatedUser();
+    public currentUser(): any {
+        return this.getAuthUser();
     }
 
     /**
@@ -25,11 +28,14 @@ export class AuthenticationService {
      * @param email email of user
      * @param password password of user
      */
-    login(email: string, password: string) {
-        return getFirebaseBackend().loginUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
+    login(userName: string, password: string,rememberMe: boolean) {
+        const body = {
+            userName: userName,
+            password: password,
+            rememberMe: rememberMe
+        };
+      
+        return this.http.post('/auth/login', body);
     }
 
     /**
@@ -59,8 +65,18 @@ export class AuthenticationService {
      * Logout the user
      */
     logout() {
-        // logout the user
-        getFirebaseBackend().logout();
+        console.log("lsdjflksdjflksdjfldsjfls")
+        localStorage.removeItem('authUser');
+    }
+
+    // Set token
+    setAuthUser(user: any): void {
+        localStorage.setItem('authUser', JSON.stringify(user));
+    }
+
+    // Get Token
+    getAuthUser(): string | null {
+        return localStorage.getItem('authUser');
     }
 }
 

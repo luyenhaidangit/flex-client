@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  defaultauth: 'fackbackend',
+  // defaultauth: 'fackbackend',
+  defaultauth: 'database',
+  flexServer: {
+    apiUrl: 'https://localhost:7207/api'
+  },
   firebaseConfig: {
     apiKey: '',
     authDomain: '',

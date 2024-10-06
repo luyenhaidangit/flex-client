@@ -34,8 +34,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      email: ['admin@themesbrand.com', [Validators.required, Validators.email]],
-      password: ['123456', [Validators.required]],
+      userName: ['admin', [Validators.required]],
+      password: ['Haidang106@', [Validators.required]],
+      rememberMe: [true] 
     });
 
     // reset login status
@@ -53,20 +54,32 @@ export class LoginComponent implements OnInit {
    */
   onSubmit() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
     } else {
-      if (environment.defaultauth === 'firebase') {
-        this.authenticationService.login(this.f.email.value, this.f.password.value).then((res: any) => {
-          this.router.navigate(['/dashboard']);
-        })
-          .catch(error => {
-            this.error = error ? error : '';
-          });
+      if (environment.defaultauth === 'database') {
+        // this.authenticationService.login(this.f.email.value, this.f.password.value,this.f.rememberMe.value).then((res: any) => {
+        //   this.router.navigate(['/dashboard']);
+        // })
+        //   .catch(error => {
+        //     this.error = error ? error : '';
+        //   });
+        this.authenticationService.login(this.f.userName.value, this.f.password.value,this.f.rememberMe.value)
+          .subscribe(
+            (response: any) => {
+              const authUser = response?.data;
+              if (authUser) {
+                this.authenticationService.setAuthUser(authUser);
+              }
+              this.router.navigate(['/dashboard']);
+          },
+          error => {
+            console.error('Login failed', error);
+          }
+      );
       } else {
-        this.authFackservice.login(this.f.email.value, this.f.password.value)
+        this.authFackservice.login(this.f.userName.value, this.f.password.value)
           .pipe(first())
           .subscribe(
             data => {
