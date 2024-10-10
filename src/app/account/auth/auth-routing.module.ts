@@ -12,7 +12,8 @@ import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
 const routes: Routes = [
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        data: { title: 'Đăng nhập' }
     },
     {
         path: 'signup',
@@ -41,3 +42,4 @@ const routes: Routes = [
     exports: [RouterModule]
 })
 export class AuthRoutingModule { }
+

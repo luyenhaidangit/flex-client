@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   submitted:any = false;
   error:any = '';
   returnUrl: string;
+  passwordFieldType: string = 'password';
 
   // set the currenr year
   year: number = new Date().getFullYear();
@@ -90,5 +91,9 @@ export class LoginComponent implements OnInit {
             });
       }
     }
+  }
+
+  togglePasswordVisibility() {
+    this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }
 }

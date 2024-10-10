@@ -1,4 +1,7 @@
 import { Component , OnInit} from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { filter, map, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +9,28 @@ import { Component , OnInit} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit  {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private titleService: Title
+  ) {}
 
   ngOnInit() {
-    // document.getElementsByTagName("html")[0].setAttribute("dir", "rtl");
+    this.setPageTitle();
+  }
+
+  private setPageTitle() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => {
+        let child = this.activatedRoute.firstChild;
+        while (child && child.firstChild) {
+          child = child.firstChild;
+        }
+        return child?.snapshot.data['title'] || 'Default Title';
+      })
+    ).subscribe((title: string) => {
+      this.titleService.setTitle(title);
+    });
   }
 }

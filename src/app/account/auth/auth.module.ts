@@ -12,7 +12,7 @@ import { SignupComponent } from './signup/signup.component';
 import { Register2Component } from './register2/register2.component';
 import { Recoverpwd2Component } from './recoverpwd2/recoverpwd2.component';
 
-import { AuthRoutingModule } from './auth-routing';
+import { AuthRoutingModule } from './auth-routing.module';
 import { PasswordresetComponent } from './passwordreset/passwordreset.component';
 
 @NgModule({
