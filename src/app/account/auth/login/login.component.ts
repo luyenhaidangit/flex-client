@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
-import { AuthenticationService } from '../../../core/services/auth.service';
-import { AuthfakeauthenticationService } from '../../../core/services/authfake.service';
-
-import { ActivatedRoute, Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { ToastService } from 'angular-toastify';
 
 import { environment } from '../../../../environments/environment';
+import { AuthenticationService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,12 +24,17 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   passwordFieldType: string = 'password';
 
-  // set the currenr year
+  // Set the currenr year
   year: number = new Date().getFullYear();
 
   // tslint:disable-next-line: max-line-length
-  constructor(private formBuilder: UntypedFormBuilder, private route: ActivatedRoute, private router: Router, private authenticationService: AuthenticationService,
-    private authFackservice: AuthfakeauthenticationService) { }
+  constructor(
+    private formBuilder: UntypedFormBuilder,
+    private router: Router, 
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private toastService: ToastService
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -40,14 +43,11 @@ export class LoginComponent implements OnInit {
       rememberMe: [true] 
     });
 
-    // reset login status
-    // this.authenticationService.logout();
-    // get return url from route parameters or default to '/'
-    // tslint:disable-next-line: no-string-literal
+    // Reset login status
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
+  // Convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   /**
@@ -58,41 +58,31 @@ export class LoginComponent implements OnInit {
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
-    } else {
-      if (environment.defaultauth === 'database') {
-        // this.authenticationService.login(this.f.email.value, this.f.password.value,this.f.rememberMe.value).then((res: any) => {
-        //   this.router.navigate(['/dashboard']);
-        // })
-        //   .catch(error => {
-        //     this.error = error ? error : '';
-        //   });
-        this.authenticationService.login(this.f.userName.value, this.f.password.value,this.f.rememberMe.value)
-          .subscribe(
-            (response: any) => {
-              const authUser = response?.data;
-              if (authUser) {
-                this.authenticationService.setAuthUser(authUser);
-              }
-              this.router.navigate(['/dashboard']);
-          },
-          error => {
-            console.error('Login failed', error);
+    } 
+    
+    if (environment.authType === 'username') {
+      var isRemember = this.f.rememberMe.value;
+
+      this.authenticationService.login(this.f.userName.value, this.f.password.value,isRemember)
+        .subscribe(
+        (response: any) => {
+          if(response?.isSuccess){
+            const accessToken = response?.data?.accessToken;
+            const userCurrent = response?.data?.userInfo;
+
+            this.authenticationService.setAuthToken({ accessToken },isRemember);
+            this.authenticationService.SetCurrentUser(userCurrent);
+            this.toastService.success('Đăng nhập thành công!');
+            this.router.navigate(['/dashboard']);
           }
-      );
-      } else {
-        this.authFackservice.login(this.f.userName.value, this.f.password.value)
-          .pipe(first())
-          .subscribe(
-            data => {
-              this.router.navigate(['/dashboard']);
-            },
-            error => {
-              this.error = error ? error : '';
-            });
-      }
-    }
+        },
+        (failure: any) => {
+          this.toastService.error(failure?.error?.message);
+        }
+    )};
   }
 
+  // UI
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   }

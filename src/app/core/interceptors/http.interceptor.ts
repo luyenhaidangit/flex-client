@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor as HttpSystemInterceptor, HttpRequest } from '@angular/common/http';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { catchError, switchMap, finalize, filter, take, retry } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
 import { ToastService } from 'angular-toastify';
 
-import { LoaderService } from '../services/loader.service';
 import { Header, HttpError } from '../enums/http.enum';
+import { LoaderService } from '../services/loader.service';
+import { AuthenticationService } from '../services/auth.service';
 
 @Injectable()
 export class HttpInterceptor implements HttpSystemInterceptor {
-  constructor(private loadingService: LoaderService, private toastService: ToastService) {}
+  constructor(private loadingService: LoaderService, private toastService: ToastService, private authService: AuthenticationService) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Set default baseurl
@@ -25,6 +26,16 @@ export class HttpInterceptor implements HttpSystemInterceptor {
     } else {
       request = request.clone({
         headers: request.headers.delete(Header.SkipLoading)
+      });
+    }
+
+    // Set token header
+    const authToken = this.authService.getAuthToken();
+    if (authToken?.accessToken) {
+      request = request.clone({
+        setHeaders: {
+          Authorization: `Bearer ${authToken.accessToken}`,
+        }
       });
     }
     

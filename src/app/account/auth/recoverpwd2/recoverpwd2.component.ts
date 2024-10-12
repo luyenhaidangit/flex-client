@@ -45,10 +45,10 @@ export class Recoverpwd2Component implements OnInit {
       return;
     }
     if (environment.defaultauth === 'firebase') {
-      this.authenticationService.resetPassword(this.f.email.value)
-        .catch(error => {
-          this.error = error ? error : '';
-        });
+      // this.authenticationService.resetPassword(this.f.email.value)
+      //   .catch(error => {
+      //     this.error = error ? error : '';
+      //   });
     }
   }
 

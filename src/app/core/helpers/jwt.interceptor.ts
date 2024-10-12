@@ -13,7 +13,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (environment.defaultauth === 'firebase') {
-            const currentUser = this.authenticationService.currentUser();
+            const currentUser = this.authenticationService.GetCurrentUser();
             if (currentUser && currentUser.token) {
                 request = request.clone({
                     setHeaders: {

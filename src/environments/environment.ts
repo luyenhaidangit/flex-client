@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // defaultauth: 'fackbackend',
+  authType: 'username',
   defaultauth: 'database',
   flexServer: {
     apiUrl: 'https://localhost:7207/api'

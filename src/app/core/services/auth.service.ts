@@ -6,29 +6,19 @@ import { User } from '../models/auth.models';
 
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LocalStorage } from '../enums/local-storage.enum';
 
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
 
-    user: User;
+    private user: any;
 
     constructor(private http: HttpClient,private router: Router) {
     }
 
-    /**
-     * Returns the current user
-     */
-    public currentUser(): any {
-        return this.getAuthUser();
-    }
-
-    /**
-     * Performs the auth
-     * @param email email of user
-     * @param password password of user
-     */
-    login(userName: string, password: string,rememberMe: boolean) {
+    // Login
+    public login(userName: string, password: string,rememberMe: boolean) {
         const body = {
             userName: userName,
             password: password,
@@ -38,45 +28,49 @@ export class AuthenticationService {
         return this.http.post('/auth/login', body);
     }
 
-    /**
-     * Performs the register
-     * @param email email
-     * @param password password
-     */
-    register(email: string, password: string) {
-        return getFirebaseBackend().registerUser(email, password).then((response: any) => {
-            const user = response;
-            return user;
-        });
+    public logout() {
+        this.removeAuthToken();
     }
 
-    /**
-     * Reset password
-     * @param email email
-     */
-    resetPassword(email: string) {
-        return getFirebaseBackend().forgetPassword(email).then((response: any) => {
-            const message = response.data;
-            return message;
-        });
+    // Set AuthToken
+    public setAuthToken(authToken: any, rememberMe: boolean) {
+        const tokenString = JSON.stringify(authToken);
+    
+        if (rememberMe) {
+            localStorage.setItem(LocalStorage.AuthToken, tokenString);
+        } else {
+            sessionStorage.setItem(LocalStorage.AuthToken, tokenString);
+        }
+    }
+    
+
+    // Get AuthToken
+    public getAuthToken(): any {
+        const tokenString = localStorage.getItem(LocalStorage.AuthToken) || sessionStorage.getItem(LocalStorage.AuthToken);
+        if (tokenString) {
+            return JSON.parse(tokenString);
+        }
+        return null;
     }
 
-    /**
-     * Logout the user
-     */
-    logout() {
-        console.log("lsdjflksdjflksdjfldsjfls")
-        localStorage.removeItem('authUser');
+    // Delete AuthToken
+    private removeAuthToken() {
+        localStorage.removeItem('authToken');
+        sessionStorage.removeItem('authToken');
     }
 
-    // Set token
-    setAuthUser(user: any): void {
-        localStorage.setItem('authUser', JSON.stringify(user));
+    // Get Current User
+    public GetCurrentUser(): any {
+        return this.user;
     }
 
-    // Get Token
-    getAuthUser(): string | null {
-        return localStorage.getItem('authUser');
+    public SetCurrentUser(user: any): any {
+        this.user = user;
+    }
+
+    // Get User Profile
+    public GetUserProfile() { 
+        return this.http.post('/auth/user-profile',null);
     }
 }
 

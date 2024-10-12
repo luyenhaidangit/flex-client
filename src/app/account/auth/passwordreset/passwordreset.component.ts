@@ -53,10 +53,10 @@ export class PasswordresetComponent implements OnInit, AfterViewInit {
       return;
     }
     if (environment.defaultauth === 'firebase') {
-      this.authenticationService.resetPassword(this.f.email.value)
-        .catch(error => {
-          this.error = error ? error : '';
-        });
+      // this.authenticationService.resetPassword(this.f.email.value)
+      //   .catch(error => {
+      //     this.error = error ? error : '';
+      //   });
     }
   }
 }
