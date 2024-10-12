@@ -15,7 +15,7 @@ export class LoaderComponent implements OnInit {
     this.loaderService.isLoader.subscribe((v) => {
       setTimeout(() => {
         this.loading = v;
-      }, 1500);     
+      }, 500);     
     });
   }
   

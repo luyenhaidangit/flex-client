@@ -20,14 +20,13 @@ export class AuthGuard {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     if (environment.authType === 'username') {
       const currentUser = this.authenticationService.GetCurrentUser();
-      console.log(currentUser);
 
       // Refresh user info if current user is null
       if (!currentUser) {
         return this.authenticationService.GetUserProfile().pipe(
           map((response: any) => {
             if (response?.isSuccess) {
-              this.authenticationService.SetCurrentUser(response?.data?.userInfo);
+              this.authenticationService.SetCurrentUser(response?.data);
               return true;
             } else {
               this.router.navigate(['/account/login'], { queryParams: { returnUrl: state.url } });

@@ -66,6 +66,11 @@ export class TopbarComponent implements OnInit {
       this.languageService.setLanguage(lang);
     }
 
+  // Get Current User
+  public GetCurrentUser(): any{
+    return this.authService.GetCurrentUser();
+  }
+
   /**
    * Toggles the right sidebar
    */
