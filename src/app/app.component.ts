@@ -27,7 +27,7 @@ export class AppComponent implements OnInit  {
         while (child && child.firstChild) {
           child = child.firstChild;
         }
-        return child?.snapshot.data['title'] || 'Default Title';
+        return child?.snapshot.data['title'] || 'Flex - Phần mềm quản lý và giao dịch chứng khoán';
       })
     ).subscribe((title: string) => {
       this.titleService.setTitle(title);

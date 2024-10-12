@@ -38,6 +38,7 @@
     "@nicky-lenaers/ngx-scroll-to": "^14.0.0",
     "@popperjs/core": "^2.11.8",
     "angular-ng-stepper": "^2.0.0",
+    "angular-toastify": "^2.0.0",
     "angularx-flatpickr": "^7.3.0",
     "apexcharts": "^3.41.0",
     "bootstrap": "5.3.0",

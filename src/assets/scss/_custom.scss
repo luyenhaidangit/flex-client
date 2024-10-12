@@ -421,3 +421,9 @@ a.ck.ck-button.ck-on {
         justify-content: center;
     }
 }
+
+// Input
+// Hide reveal password EDGE
+input::-ms-reveal {
+    display: none;
+}
