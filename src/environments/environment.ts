@@ -9,6 +9,10 @@ export const environment = {
   flexServer: {
     apiUrl: 'https://localhost:7207/api'
   },
+  externalService: {
+    translateServiceUrl: "http://localhost:4200/assets/i18n/",
+    configServiceUrl: "http://localhost:4200/assets/dashboard.json"
+  },
   firebaseConfig: {
     apiKey: '',
     authDomain: '',

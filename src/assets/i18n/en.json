@@ -66,14 +66,24 @@
     }
   },
   "MENUITEMS": {
+    "APP": {
+      "TEXT": "App",
+      "DASHBOARDS": "Trang điều khiển",
+      "DASHBOARDS.DEFAULT": "Trang chủ"
+    },
+    "SYSTEM": {
+      "TEXT": "Hệ thống",
+      "MANAGESYSTEM": "Quản trị hệ thống",
+      "MANAGESYSTEM.DEPARTMENT": "Quản lý phòng ban"
+    },
     "MENU": {
-      "TEXT": "Menu"
+      "TEXT": "Hệ thống"
     },
     "DASHBOARDS": {
-      "TEXT": "Dashboards",
+      "TEXT": "Trang điều khiển",
       "BADGE": "04",
       "LIST": {
-        "DEFAULT": "Default",
+        "DEFAULT": "Mặc định",
         "SAAS": "Saas",
         "CRYPTO": "Crypto",
         "BLOG": "Blog",

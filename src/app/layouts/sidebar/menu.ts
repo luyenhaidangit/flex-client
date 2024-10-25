@@ -3,44 +3,44 @@ import { MenuItem } from './menu.model';
 export const MENU: MenuItem[] = [
     {
         id: 1,
-        label: 'MENUITEMS.MENU.TEXT',
+        label: 'MENUITEMS.APP.TEXT',
         isTitle: true
     },
     {
         id: 2,
-        label: 'MENUITEMS.DASHBOARDS.TEXT',
-        icon: 'bx-home-circle',
+        label: 'MENUITEMS.APP.DASHBOARDS',
+        icon: 'bx bxs-home-circle',
         subItems: [
             {
                 id: 3,
-                label: 'MENUITEMS.DASHBOARDS.LIST.DEFAULT',
+                label: 'MENUITEMS.APP.DASHBOARDS.DEFAULT',
                 link: '/dashboard',
                 parentId: 2
             },
-            {
-                id: 4,
-                label: 'MENUITEMS.DASHBOARDS.LIST.SAAS',
-                link: '/dashboards/saas',
-                parentId: 2
-            },
-            {
-                id: 5,
-                label: 'MENUITEMS.DASHBOARDS.LIST.CRYPTO',
-                link: '/dashboards/crypto',
-                parentId: 2
-            },
-            {
-                id: 6,
-                label: 'MENUITEMS.DASHBOARDS.LIST.BLOG',
-                link: '/dashboards/blog',
-                parentId: 2
-            },
-            {
-                id: 7,
-                label: 'MENUITEMS.DASHBOARDS.LIST.JOBS',
-                link: '/dashboards/jobs',
-                parentId: 2,
-            },
+            // {
+            //     id: 4,
+            //     label: 'MENUITEMS.DASHBOARDS.LIST.SAAS',
+            //     link: '/dashboards/saas',
+            //     parentId: 2
+            // },
+            // {
+            //     id: 5,
+            //     label: 'MENUITEMS.DASHBOARDS.LIST.CRYPTO',
+            //     link: '/dashboards/crypto',
+            //     parentId: 2
+            // },
+            // {
+            //     id: 6,
+            //     label: 'MENUITEMS.DASHBOARDS.LIST.BLOG',
+            //     link: '/dashboards/blog',
+            //     parentId: 2
+            // },
+            // {
+            //     id: 7,
+            //     label: 'MENUITEMS.DASHBOARDS.LIST.JOBS',
+            //     link: '/dashboards/jobs',
+            //     parentId: 2,
+            // },
         ]
     },
     {
@@ -49,8 +49,63 @@ export const MENU: MenuItem[] = [
     },
     {
         id: 9,
-        label: 'MENUITEMS.APPS.TEXT',
+        label: 'MENUITEMS.SYSTEM.TEXT',
         isTitle: true
+    },
+    {
+        id: 13,
+        label: 'MENUITEMS.SYSTEM.MANAGESYSTEM',
+        icon: 'bx bxs-widget',
+        subItems: [
+            {
+                id: 14,
+                label: 'MENUITEMS.SYSTEM.MANAGESYSTEM.DEPARTMENT',
+                link: '/ecommerce/products',
+                parentId: 13
+            },
+            {
+                id: 15,
+                label: 'MENUITEMS.ECOMMERCE.LIST.PRODUCTDETAIL',
+                link: '/ecommerce/product-detail/1',
+                parentId: 13
+            },
+            {
+                id: 16,
+                label: 'MENUITEMS.ECOMMERCE.LIST.ORDERS',
+                link: '/ecommerce/orders',
+                parentId: 13
+            },
+            {
+                id: 17,
+                label: 'MENUITEMS.ECOMMERCE.LIST.CUSTOMERS',
+                link: '/ecommerce/customers',
+                parentId: 13
+            },
+            {
+                id: 18,
+                label: 'MENUITEMS.ECOMMERCE.LIST.CART',
+                link: '/ecommerce/cart',
+                parentId: 13
+            },
+            {
+                id: 19,
+                label: 'MENUITEMS.ECOMMERCE.LIST.CHECKOUT',
+                link: '/ecommerce/checkout',
+                parentId: 13
+            },
+            {
+                id: 20,
+                label: 'MENUITEMS.ECOMMERCE.LIST.SHOPS',
+                link: '/ecommerce/shops',
+                parentId: 13
+            },
+            {
+                id: 21,
+                label: 'MENUITEMS.ECOMMERCE.LIST.ADDPRODUCT',
+                link: '/ecommerce/add-product',
+                parentId: 13
+            },
+        ]
     },
     {
         id: 10,

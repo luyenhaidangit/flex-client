@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
 
 export class ConfigService {
 
-  URL = 'assets/dashboard.json';
+  URL = environment.externalService.configServiceUrl;
 
   constructor(private http: HttpClient) { }
   getConfig() : Observable<any> {
