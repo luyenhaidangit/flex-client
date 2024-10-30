@@ -422,8 +422,22 @@ a.ck.ck-button.ck-on {
     }
 }
 
+// Body
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
 // Input
 // Hide reveal password EDGE
 input::-ms-reveal {
     display: none;
+}
+
+// Custom class
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.action-column > span {
+    cursor: pointer;
 }

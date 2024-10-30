@@ -12,6 +12,8 @@ const routes: Routes = [
     path: "",
     component: DefaultComponent
   },
+  // System
+  { path: 'system', loadChildren: () => import('./system/system.module').then(m => m.SystemModule) },
   { path: 'dashboard', component: DefaultComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'chat', component: ChatComponent },

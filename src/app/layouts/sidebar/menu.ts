@@ -60,7 +60,7 @@ export const MENU: MenuItem[] = [
             {
                 id: 14,
                 label: 'MENUITEMS.SYSTEM.MANAGESYSTEM.DEPARTMENT',
-                link: '/ecommerce/products',
+                link: '/system/department',
                 parentId: 13
             },
             {
