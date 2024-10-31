@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SystemService } from 'src/app/core/services/system.service';
+import { STATUS_INFO } from './department.constant';
 
 @Component({
   selector: 'app-bloglist',
@@ -20,11 +21,19 @@ export class DepartmentComponent implements OnInit {
   }
 
   // Data
-  public getItems(request: any){
+  getItems(request: any){
     this.systemService.searchDepartments(request).subscribe((result: any) => {
       if(result.isSuccess){
         this.items = result.data.items;
       }
     });
+  }
+
+  getStatusText(status: number): string {
+    return STATUS_INFO[status]?.text || 'Unknown';
+  }
+
+  getStatusClass(status: number): string {
+    return STATUS_INFO[status]?.class || '';
   }
 }

@@ -47,7 +47,11 @@
                                         <td>{{ item.id }}</td>
                                         <td>{{ item?.name }}</td>
                                         <td>{{ item?.description }}</td>
-                                        <td>{{ item?.status }}</td>
+                                        <td>
+                                            <span class="badge {{ getStatusClass(item?.status) }}">
+                                                {{ getStatusText(item?.status) }}
+                                            </span>
+                                        </td>
                                         <td>{{ item?.priority }}</td>
                                         <td class="action-column">
                                             <span class="text-info"><i class="fas fa-eye"></i></span>
