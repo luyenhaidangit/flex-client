@@ -12,19 +12,41 @@ export class DepartmentComponent implements OnInit {
   // Ui
   breadCrumbItems: Array<{}>;
   items: any = [];
+  pagedInfo: any = {};
+
+  DEFAULT_PER_PAGE_OPTIONS = [
+    {
+        label: 10,
+        value: 10
+    },
+    {
+        label: 25,
+        value: 25
+    },
+    {
+        label: 50,
+        value: 50
+    },
+    {
+        label: 100,
+        value: 100
+    }
+]
 
   constructor(private systemService: SystemService) { }
 
   ngOnInit(): void {
     this.breadCrumbItems = [{ label: 'Quản trị hệ thống' }, { label: 'Quản lý phòng ban', active: true }];
-    this.getItems({});
+    this.getItems({ pageIndex: 1, pageSize: 10 });
   }
 
   // Data
   getItems(request: any){
     this.systemService.searchDepartments(request).subscribe((result: any) => {
       if(result.isSuccess){
-        this.items = result.data.items;
+        const { items, ...pagedInfo } = result.data;
+        this.items = items;
+        this.pagedInfo = pagedInfo;
       }
     });
   }

@@ -63,6 +63,33 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="table-filter d-flex justify-content-between align-items-center mt-2">
+                        <div class="page-index">
+                            <ul class="pagination">
+                                <li class="page-item" [class.disabled]="pagedInfo.pageIndex === 1 || items.length === 0">
+                                    <span class="page-link"><i class="mdi mdi-chevron-left"></i></span>
+                                </li>
+
+                                <ng-container *ngIf="items.length > 0">
+                                    <li *ngFor="let page of [].constructor(pagedInfo.totalPages); let i = index" class="page-item" [class.active]="pagedInfo.pageIndex === i + 1">
+                                      <a class="page-link cursor-pointer">{{ i + 1 }}</a>
+                                    </li>
+                                </ng-container>
+
+                                <li class="page-item" [class.disabled]="pagedInfo.pageIndex === pagedInfo.totalPages || items.length === 0">
+                                    <a class="page-link" href="javascript:void(0);"><i class="mdi mdi-chevron-right"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="per-page">
+                           Hiển thị 
+                           <select class="mx-1">
+                              <option *ngFor="let item of DEFAULT_PER_PAGE_OPTIONS;" [ngValue]="item.value" [attr.selected]="item.value === pagedInfo.pageSize ? true : null">{{ item.label }}</option>
+                           </select>
+                           / {{ pagedInfo.totalRecords }} tổng số bản ghi
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
